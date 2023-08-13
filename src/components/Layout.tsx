@@ -1,10 +1,14 @@
-import type { ReactElement } from "react";
+import type { ReactNode } from "react";
 
 import Header from "~/routes/Header";
 
-const Layout = ({ children }: { children: ReactElement }) => {
+type LayoutProps = {
+  children: ReactNode;
+};
+
+const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex min-h-screen flex-col items-center bg-slate-900">
+    <div className="flex min-h-screen flex-col items-center">
       <Header />
       <main>{children}</main>
     </div>
