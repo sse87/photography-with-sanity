@@ -1,12 +1,13 @@
-import type { ReactNode } from "react";
+import type { ReactElement } from "react";
 import Link from "next/link";
 
+import type { NextPageWithLayout } from "~/pages/_app";
 import { api } from "~/utils/api";
 
 import ThemeSwitch from "~/components/ThemeSwitch";
 import Layout from "~/components/Layout";
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   return (
@@ -46,8 +47,10 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
 
-Home.getLayout = function getLayout(page: ReactNode) {
+Home.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export default Home;

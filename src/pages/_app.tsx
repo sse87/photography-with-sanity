@@ -1,28 +1,25 @@
+import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import type { ReactNode } from "react";
 
 import ThemeProvider from "~/core/ThemeProvider";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 
-type GetLayout = (page: ReactNode) => ReactNode;
-
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Page<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: GetLayout;
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type MyAppProps<P = {}> = AppProps<P> & {
-  Component: Page<P>;
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
 };
 
-const defaultGetLayout: GetLayout = (page: ReactNode): ReactNode => page;
+const defaultGetLayout = (page: ReactElement): ReactNode => page;
 
-const MyApp = ({ Component, pageProps }: MyAppProps) => {
+const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? defaultGetLayout;
 

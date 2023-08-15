@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactElement } from "react";
 import Head from "next/head";
 
+import type { NextPageWithLayout } from "~/pages/_app";
 import Layout from "~/components/Layout";
 
-export default function Models() {
+const ModelsPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -18,8 +19,10 @@ export default function Models() {
       </div>
     </>
   );
-}
+};
 
-Models.getLayout = function getLayout(page: ReactNode) {
+ModelsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export default ModelsPage;

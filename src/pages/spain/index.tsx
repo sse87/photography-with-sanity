@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactElement } from "react";
 import Head from "next/head";
 
+import type { NextPageWithLayout } from "~/pages/_app";
 import Layout from "~/components/Layout";
 
-export default function Spain() {
+const SpainPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -18,8 +19,10 @@ export default function Spain() {
       </div>
     </>
   );
-}
+};
 
-Spain.getLayout = function getLayout(page: ReactNode) {
+SpainPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export default SpainPage;

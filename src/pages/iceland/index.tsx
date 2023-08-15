@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactElement } from "react";
 import Head from "next/head";
 
+import type { NextPageWithLayout } from "~/pages/_app";
 import Layout from "~/components/Layout";
 
-export default function Iceland() {
+const IcelandPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -18,8 +19,10 @@ export default function Iceland() {
       </div>
     </>
   );
-}
+};
 
-Iceland.getLayout = function getLayout(page: ReactNode) {
+IcelandPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export default IcelandPage;
