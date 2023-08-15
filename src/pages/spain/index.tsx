@@ -1,4 +1,7 @@
+import type { ReactNode } from "react";
 import Head from "next/head";
+
+import Layout from "~/components/Layout";
 
 export default function Spain() {
   return (
@@ -16,3 +19,7 @@ export default function Spain() {
     </>
   );
 }
+
+Spain.getLayout = function getLayout(page: ReactNode) {
+  return <Layout>{page}</Layout>;
+};

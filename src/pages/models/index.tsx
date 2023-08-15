@@ -1,4 +1,7 @@
+import type { ReactNode } from "react";
 import Head from "next/head";
+
+import Layout from "~/components/Layout";
 
 export default function Models() {
   return (
@@ -16,3 +19,7 @@ export default function Models() {
     </>
   );
 }
+
+Models.getLayout = function getLayout(page: ReactNode) {
+  return <Layout>{page}</Layout>;
+};
