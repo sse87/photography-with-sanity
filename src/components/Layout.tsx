@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
-import Header from "~/routes/Header";
+import Header from '~/routes/Header'
 
 type LayoutProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 const Layout = ({ children }: LayoutProps) => {
   return (
@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main>{children}</main>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

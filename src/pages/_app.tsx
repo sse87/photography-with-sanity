@@ -1,27 +1,27 @@
-import type { ReactElement, ReactNode } from "react";
-import type { NextPage } from "next";
-import type { AppProps } from "next/app";
-import Head from "next/head";
+import type { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
 
-import ThemeProvider from "~/core/ThemeProvider";
-import { api } from "~/utils/api";
+import ThemeProvider from '~/core/ThemeProvider'
+import { api } from '~/utils/api'
 
-import "~/styles/globals.css";
+import '~/styles/globals.css'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
+  getLayout?: (page: ReactElement) => ReactNode
+}
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+  Component: NextPageWithLayout
+}
 
-const defaultGetLayout = (page: ReactElement): ReactNode => page;
+const defaultGetLayout = (page: ReactElement): ReactNode => page
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? defaultGetLayout;
+  const getLayout = Component.getLayout ?? defaultGetLayout
 
   return (
     <>
@@ -36,7 +36,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         </ThemeProvider>
       )}
     </>
-  );
-};
+  )
+}
 
-export default api.withTRPC(MyApp);
+export default api.withTRPC(MyApp)

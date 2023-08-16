@@ -1,14 +1,14 @@
-import type { ReactElement } from "react";
-import Link from "next/link";
+import type { ReactElement } from 'react'
+import Link from 'next/link'
 
-import type { NextPageWithLayout } from "~/pages/_app";
-import { api } from "~/utils/api";
+import type { NextPageWithLayout } from '~/pages/_app'
+import { api } from '~/utils/api'
 
-import ThemeSwitch from "~/components/ThemeSwitch";
-import Layout from "~/components/Layout";
+import ThemeSwitch from '~/components/ThemeSwitch'
+import Layout from '~/components/Layout'
 
 const Home: NextPageWithLayout = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const hello = api.example.hello.useQuery({ text: 'from tRPC' })
 
   return (
     <>
@@ -41,16 +41,16 @@ const Home: NextPageWithLayout = () => {
           </Link>
         </div>
         <p className="text-2xl">
-          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+          {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
         </p>
         <ThemeSwitch />
       </div>
     </>
-  );
-};
+  )
+}
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+  return <Layout>{page}</Layout>
+}
 
-export default Home;
+export default Home

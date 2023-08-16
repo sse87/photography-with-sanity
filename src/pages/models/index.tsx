@@ -1,8 +1,8 @@
-import type { ReactElement } from "react";
-import Head from "next/head";
+import type { ReactElement } from 'react'
+import Head from 'next/head'
 
-import type { NextPageWithLayout } from "~/pages/_app";
-import Layout from "~/components/Layout";
+import type { NextPageWithLayout } from '~/pages/_app'
+import Layout from '~/components/Layout'
 
 const ModelsPage: NextPageWithLayout = () => {
   return (
@@ -18,11 +18,11 @@ const ModelsPage: NextPageWithLayout = () => {
         </h1>
       </div>
     </>
-  );
-};
+  )
+}
 
 ModelsPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+  return <Layout>{page}</Layout>
+}
 
-export default ModelsPage;
+export default ModelsPage

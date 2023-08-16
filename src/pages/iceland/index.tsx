@@ -1,8 +1,8 @@
-import type { ReactElement } from "react";
-import Head from "next/head";
+import type { ReactElement } from 'react'
+import Head from 'next/head'
 
-import type { NextPageWithLayout } from "~/pages/_app";
-import Layout from "~/components/Layout";
+import type { NextPageWithLayout } from '~/pages/_app'
+import Layout from '~/components/Layout'
 
 const IcelandPage: NextPageWithLayout = () => {
   return (
@@ -18,11 +18,11 @@ const IcelandPage: NextPageWithLayout = () => {
         </h1>
       </div>
     </>
-  );
-};
+  )
+}
 
 IcelandPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+  return <Layout>{page}</Layout>
+}
 
-export default IcelandPage;
+export default IcelandPage
