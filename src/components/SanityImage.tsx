@@ -2,11 +2,16 @@ import NextImage from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 
 import { client } from '@/sanity/lib/client'
-import type { DataImage } from '~/pages/iceland'
+import type { DataImage } from '~/types'
 
-type SanityImageProps = { image: DataImage; alt?: string; priority?: boolean }
+type SanityImageProps = {
+  image: DataImage
+  alt?: string
+  priority?: boolean
+  className?: string
+}
 
-const SanityImage = ({ image, alt, priority }: SanityImageProps) => {
+const SanityImage = ({ image, alt, priority, className }: SanityImageProps) => {
   const imageProps = useNextSanityImage(client, image.asset)
 
   return (
@@ -14,6 +19,7 @@ const SanityImage = ({ image, alt, priority }: SanityImageProps) => {
       {...imageProps}
       alt={alt ?? image.alt ?? ''}
       priority={priority}
+      className={className}
     />
   )
 }
