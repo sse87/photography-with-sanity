@@ -34,17 +34,17 @@ const ThemeSwitch = () => {
         </button>
         <button
           className="border border-input px-3 py-2 data-[active]:bg-accent"
-          data-active={theme === 'system' ? 'true' : undefined}
-          onClick={() => setTheme('system')}
-        >
-          System
-        </button>
-        <button
-          className="rounded-r-md border border-input px-3 py-2 data-[active]:bg-accent"
           data-active={theme === 'dark' ? 'true' : undefined}
           onClick={() => setTheme('dark')}
         >
           Dark
+        </button>
+        <button
+          className="rounded-r-md border border-input px-3 py-2 data-[active]:bg-accent"
+          data-active={theme === 'system' ? 'true' : undefined}
+          onClick={() => setTheme('system')}
+        >
+          System
         </button>
       </div>
     </>

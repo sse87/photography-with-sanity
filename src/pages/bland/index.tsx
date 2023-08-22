@@ -6,13 +6,15 @@ import { client } from '@/sanity/lib/client'
 import type { NextPageWithLayout } from '~/pages/_app'
 import Layout from '~/components/Layout'
 import SanityImage from '~/components/SanityImage'
+import Lightbox from '~/components/Lightbox'
 import type { DataProps } from '~/types'
 
 type IcelandPageProps = NextPageWithLayout<{ data: DataProps }>
 
 const IcelandPage: IcelandPageProps = ({ data }) => {
-  console.log('data:', data) // debug
+  // console.log('data:', data) // debug
   const { title, mainImage, body, images } = data
+  console.log('images:', images) // debug
 
   return (
     <>
@@ -30,11 +32,15 @@ const IcelandPage: IcelandPageProps = ({ data }) => {
 
         {body && <PortableText value={body} />}
 
-        <div className="grid grid-cols-3 gap-4">
+        {/* <div className="grid grid-cols-3 gap-4">
           {images?.map((image) => (
             <SanityImage key={image.asset._id} image={image} priority={false} />
           ))}
-        </div>
+        </div> */}
+
+        {images && (
+          <Lightbox images={images} className="grid grid-cols-3 gap-4" />
+        )}
       </div>
     </>
   )
