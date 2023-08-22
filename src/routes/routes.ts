@@ -25,6 +25,11 @@ const routes: NavItem[] = [
     href: '/spain',
     description: '',
   },
+  {
+    title: 'Bland',
+    href: '/bland',
+    description: '',
+  },
 ]
 
 // const routes = {

@@ -17,7 +17,7 @@ const IcelandPage: IcelandPageProps = ({ data }) => {
   return (
     <>
       <Head>
-        <title>Iceland</title>
+        <title>Bland</title>
         <meta name="description" content="Images taken in Iceland" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -30,9 +30,11 @@ const IcelandPage: IcelandPageProps = ({ data }) => {
 
         {body && <PortableText value={body} />}
 
-        {images?.map((image) => (
-          <SanityImage key={image.asset._id} image={image} priority={false} />
-        ))}
+        <div className="grid grid-cols-3 gap-4">
+          {images?.map((image) => (
+            <SanityImage key={image.asset._id} image={image} priority={false} />
+          ))}
+        </div>
       </div>
     </>
   )
@@ -58,7 +60,7 @@ export async function getStaticProps() {
           asset->{ ..., metadata }
         }
       }`,
-    { pageId: 'eb05c549-0cd8-4135-9f58-8716a4fe0a9c' }
+    { pageId: '63c59fef-8c15-4e37-89c0-2a5edae09f97' }
   )
 
   return {

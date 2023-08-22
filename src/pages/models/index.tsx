@@ -12,7 +12,8 @@ type ModelsPageProps = NextPageWithLayout<{ data: DataProps }>
 
 const ModelsPage: ModelsPageProps = ({ data }) => {
   console.log('data:', data) // debug
-  const { mainImage, body, images } = data
+  const { title, mainImage, body, images } = data
+
   return (
     <>
       <Head>
@@ -22,7 +23,7 @@ const ModelsPage: ModelsPageProps = ({ data }) => {
       </Head>
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Models
+          {title}
         </h1>
 
         {mainImage && <SanityImage image={mainImage} priority={true} />}
@@ -47,7 +48,7 @@ export default ModelsPage
 
 export async function getStaticProps() {
   const data = await client.fetch<DataProps[]>(
-    `*[_type == "page" && title == $pageTitle] {
+    `*[_type == "page" && _id == $pageId] {
         title,
         mainImage {
           alt,
@@ -59,7 +60,7 @@ export async function getStaticProps() {
           asset->{ ..., metadata }
         }
       }`,
-    { pageTitle: 'Models' }
+    { pageId: 'c459c05c-3cbb-45a4-af2a-3237c43dd8e1' }
   )
 
   return {
