@@ -1,14 +1,20 @@
 import type { ReactElement } from 'react'
 import Link from 'next/link'
+import type { ImageAsset } from 'sanity'
 
+import { client } from '@/sanity/lib/client'
 import type { NextPageWithLayout } from '~/pages/_app'
 import { api } from '~/utils/api'
 
 import ThemeSwitch from '~/components/ThemeSwitch'
 import Layout from '~/components/Layout'
+import SanityImage from '~/components/SanityImage'
 
-const Home: NextPageWithLayout = () => {
+type HomePageProps = NextPageWithLayout<{ images: ImageAsset[] }>
+
+const HomePage: HomePageProps = ({ images }) => {
   const hello = api.example.hello.useQuery({ text: 'from tRPC' })
+  console.log('images:', images)
 
   return (
     <>
@@ -44,13 +50,35 @@ const Home: NextPageWithLayout = () => {
           {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
         </p>
         <ThemeSwitch />
+        <p>Newest images</p>
+        <div className="grid grid-cols-4 gap-4">
+          {images?.map((image) => (
+            <SanityImage
+              key={image._id}
+              image={{ alt: '', asset: image }}
+              priority={false}
+            />
+          ))}
+        </div>
       </div>
     </>
   )
 }
 
-Home.getLayout = function getLayout(page: ReactElement) {
+HomePage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>
 }
 
-export default Home
+export default HomePage
+
+export async function getStaticProps() {
+  const images = await client.fetch<ImageAsset[]>(
+    `*[_type == "sanity.imageAsset"] | order(_createdAt desc)[0..7]`
+  )
+
+  return {
+    props: {
+      images,
+    },
+  }
+}
