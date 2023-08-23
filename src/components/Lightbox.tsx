@@ -12,7 +12,7 @@ type LightboxProps = {
 const baseUrl = 'https://cdn.sanity.io/images/tv6g15v8/production/'
 
 const Lightbox = ({ images, className }: LightboxProps) => {
-  console.log('Lightbox props:', { images, className })
+  // console.log('Lightbox props:', { images, className })
 
   const renderImage = images.map((image) => {
     return {
@@ -25,7 +25,7 @@ const Lightbox = ({ images, className }: LightboxProps) => {
       lqip: image.asset.metadata.lqip,
     }
   })
-  console.log('renderImage:', renderImage)
+  // console.log('renderImage:', renderImage)
 
   return (
     <Gallery>
@@ -42,9 +42,9 @@ const Lightbox = ({ images, className }: LightboxProps) => {
               <div
                 ref={ref as React.Ref<HTMLDivElement>}
                 className="cursor-pointer"
+                onClick={open}
               >
                 <SanityImage
-                  onClick={open}
                   id={image.id}
                   baseUrl={baseUrl}
                   width={500}

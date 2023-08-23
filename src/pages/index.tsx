@@ -14,7 +14,7 @@ type HomePageProps = NextPageWithLayout<{ images: ImageAsset[] }>
 
 const HomePage: HomePageProps = ({ images }) => {
   const hello = api.example.hello.useQuery({ text: 'from tRPC' })
-  console.log('images:', images)
+  // console.log('images:', images)
 
   return (
     <>
@@ -53,11 +53,7 @@ const HomePage: HomePageProps = ({ images }) => {
         <p>Newest images</p>
         <div className="grid grid-cols-4 gap-4">
           {images?.map((image) => (
-            <SanityImage
-              key={image._id}
-              image={{ alt: '', asset: image }}
-              priority={false}
-            />
+            <SanityImage key={image._id} image={{ alt: '', asset: image }} />
           ))}
         </div>
       </div>

@@ -11,7 +11,7 @@ import type { DataProps } from '~/types'
 type IcelandPageProps = NextPageWithLayout<{ data: DataProps }>
 
 const IcelandPage: IcelandPageProps = ({ data }) => {
-  console.log('data:', data) // debug
+  // console.log('data:', data) // debug
   const { title, mainImage, body, images } = data
 
   return (
@@ -26,12 +26,12 @@ const IcelandPage: IcelandPageProps = ({ data }) => {
           {title}
         </h1>
 
-        {mainImage && <SanityImage image={mainImage} priority={true} />}
+        {mainImage && <SanityImage image={mainImage} />}
 
         {body && <PortableText value={body} />}
 
         {images?.map((image) => (
-          <SanityImage key={image.asset._id} image={image} priority={false} />
+          <SanityImage key={image.asset._id} image={image} maxWidth={1400} />
         ))}
       </div>
     </>

@@ -1,24 +1,32 @@
-import NextImage from 'next/image'
-import { useNextSanityImage } from 'next-sanity-image'
+import { SanityImage as SanityImagePackage } from 'sanity-image'
 
-import { client } from '@/sanity/lib/client'
 import type { DataImage } from '~/types'
+
+const baseUrl = 'https://cdn.sanity.io/images/tv6g15v8/production/'
 
 type SanityImageProps = {
   image: DataImage
   alt?: string
-  priority?: boolean
+  maxWidth?: number
   className?: string
 }
 
-const SanityImage = ({ image, alt, priority, className }: SanityImageProps) => {
-  const imageProps = useNextSanityImage(client, image.asset)
+const SanityImage = ({ image, alt, maxWidth, className }: SanityImageProps) => {
+  const width = maxWidth
+    ? Math.min(image.asset.metadata.dimensions.width, maxWidth)
+    : image.asset.metadata.dimensions.width
 
   return (
-    <NextImage
-      {...imageProps}
+    <SanityImagePackage
+      id={image.asset._id}
+      baseUrl={baseUrl}
+      width={width}
+      mode="cover"
+      sizes={
+        maxWidth ? `(max-width: ${maxWidth}px) 100vw, ${maxWidth}px` : '100vw'
+      }
+      preview={image.asset.metadata.lqip}
       alt={alt ?? image.alt ?? ''}
-      priority={priority}
       className={className}
     />
   )
