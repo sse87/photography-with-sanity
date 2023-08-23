@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 import 'photoswipe/style.css'
 import { SanityImage } from 'sanity-image'
@@ -13,6 +16,16 @@ const baseUrl = 'https://cdn.sanity.io/images/tv6g15v8/production/'
 
 const Lightbox = ({ images, className }: LightboxProps) => {
   // console.log('Lightbox props:', { images, className })
+  const [isMounted, setIsMounted] = useState(false)
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
 
   const renderImage = images.map((image) => {
     return {

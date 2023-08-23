@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react'
 import Head from 'next/head'
+import NextImage from 'next/image'
 import { PortableText } from '@portabletext/react'
 
 import { client } from '@/sanity/lib/client'
 import type { NextPageWithLayout } from '~/pages/_app'
 import Layout from '~/components/Layout'
-import SanityImage from '~/components/SanityImage'
 import Lightbox from '~/components/Lightbox'
 import type { DataProps } from '~/types'
 
@@ -28,7 +28,19 @@ const IcelandPage: IcelandPageProps = ({ data }) => {
           {title}
         </h1>
 
-        {mainImage && <SanityImage image={mainImage} />}
+        {mainImage && (
+          <NextImage
+            src={mainImage.asset.url}
+            width={mainImage.asset.metadata.dimensions.width}
+            height={mainImage.asset.metadata.dimensions.height}
+            alt={mainImage.alt ?? ''}
+            priority={true}
+            placeholder="blur"
+            blurDataURL={mainImage.asset.metadata.lqip}
+            quality={75}
+            sizes="(max-width: 1368px) 100vw, 1368px"
+          />
+        )}
 
         {body && <PortableText value={body} />}
 

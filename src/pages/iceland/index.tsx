@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react'
 import Head from 'next/head'
+import NextImage from 'next/image'
 import { PortableText } from '@portabletext/react'
 
 import { client } from '@/sanity/lib/client'
 import type { NextPageWithLayout } from '~/pages/_app'
 import Layout from '~/components/Layout'
-import SanityImage from '~/components/SanityImage'
 import type { DataProps } from '~/types'
 
 type IcelandPageProps = NextPageWithLayout<{ data: DataProps }>
@@ -26,12 +26,35 @@ const IcelandPage: IcelandPageProps = ({ data }) => {
           {title}
         </h1>
 
-        {mainImage && <SanityImage image={mainImage} />}
+        {mainImage && (
+          <NextImage
+            src={mainImage.asset.url}
+            width={mainImage.asset.metadata.dimensions.width}
+            height={mainImage.asset.metadata.dimensions.height}
+            alt={mainImage.alt ?? ''}
+            priority={true}
+            placeholder="blur"
+            blurDataURL={mainImage.asset.metadata.lqip}
+            quality={75}
+            sizes="(max-width: 1368px) 100vw, 1368px"
+          />
+        )}
 
         {body && <PortableText value={body} />}
 
         {images?.map((image) => (
-          <SanityImage key={image.asset._id} image={image} maxWidth={1400} />
+          <NextImage
+            key={image.asset._id}
+            src={image.asset.url}
+            width={image.asset.metadata.dimensions.width}
+            height={image.asset.metadata.dimensions.height}
+            alt={image.alt ?? ''}
+            priority={true}
+            placeholder="blur"
+            blurDataURL={image.asset.metadata.lqip}
+            quality={75}
+            sizes="(max-width: 1368px) 100vw, 1368px"
+          />
         ))}
       </div>
     </>
